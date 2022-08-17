@@ -384,8 +384,11 @@ S2N_RESULT s2n_rand_init(void)
     RESULT_GUARD_OSSL(ENGINE_set_init_function(e, s2n_openssl_compat_init), S2N_ERR_OPEN_RANDOM6);
     RESULT_GUARD_OSSL(ENGINE_set_RAND(e, &s2n_openssl_rand_method), S2N_ERR_OPEN_RANDOM7);
     //RESULT_GUARD_OSSL(ENGINE_add(e), S2N_ERR_OPEN_RANDOM8);
+    fprintf(stderr, "#### ENGINE_add() will be called\n");
+
     if (ENGINE_add(e) != _OSSL_SUCCESS) {
-	fprintf(stderr, "#### failure from ENGINE_add: %s", ERR_error_string(ERR_get_error(), NULL));
+	//ERR_print_errors_fp(stderr);
+	fprintf(stderr, "#### failure from ENGINE_add: %s\n", ERR_error_string(ERR_get_error(), NULL));
         RESULT_BAIL(S2N_ERR_OPEN_RANDOM8);
     }
 
