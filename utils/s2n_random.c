@@ -383,10 +383,10 @@ S2N_RESULT s2n_rand_init(void)
     RESULT_GUARD_OSSL(ENGINE_set_flags(e, ENGINE_FLAGS_NO_REGISTER_ALL), S2N_ERR_OPEN_RANDOM5);
     RESULT_GUARD_OSSL(ENGINE_set_init_function(e, s2n_openssl_compat_init), S2N_ERR_OPEN_RANDOM6);
     RESULT_GUARD_OSSL(ENGINE_set_RAND(e, &s2n_openssl_rand_method), S2N_ERR_OPEN_RANDOM7);
-    RESULT_GUARD_OSSL(ENGINE_add(e), S2N_ERR_OPEN_RANDOM8);
+    //RESULT_GUARD_OSSL(ENGINE_add(e), S2N_ERR_OPEN_RANDOM8);
     if (ENGINE_add(e) != _OSSL_SUCCESS) {
 	printf("%s", ERR_error_string(ERR_get_error(), NULL));
-        RESULT_BAIL(error);
+        RESULT_BAIL(S2N_ERR_OPEN_RANDOM8);
     }
 
     RESULT_GUARD_OSSL(ENGINE_free(e) , S2N_ERR_OPEN_RANDOM9);
