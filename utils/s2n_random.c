@@ -385,6 +385,7 @@ S2N_RESULT s2n_rand_init(void)
     RESULT_GUARD_OSSL(ENGINE_set_RAND(e, &s2n_openssl_rand_method), S2N_ERR_OPEN_RANDOM7);
     //RESULT_GUARD_OSSL(ENGINE_add(e), S2N_ERR_OPEN_RANDOM8);
     fprintf(stderr, "#### ENGINE_add() will be called\n");
+    fprintf(stderr, "%s\n", SSLeay_version(SSLEAY_VERSION));
 
     if (ENGINE_add(e) != _OSSL_SUCCESS) {
 	//ERR_print_errors_fp(stderr);
