@@ -424,6 +424,7 @@ S2N_RESULT s2n_rand_cleanup(void)
     /* Cleanup our rand ENGINE in libcrypto */
     ENGINE *rand_engine = ENGINE_by_id(S2N_RAND_ENGINE_ID);
     if (rand_engine) {
+        fprintf(stderr, "**** engine remove will be called\n");
         ENGINE_remove(rand_engine);
         ENGINE_finish(rand_engine);
         ENGINE_free(rand_engine);
